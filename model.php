@@ -144,10 +144,10 @@ class Player extends Base {
 		parent::__construct(NULL);
 	}
 	
-	public function loadSession($play_cap = 1, $min_size = 50){
+	public function loadSession($play_cap = 1){
 		//get all unplaid songs in associated array
-		//if songs in the array are less than minsize recursively ++ Splay_cap
-		//I worry about a stack overflow
+		//select all songs where playcount is less than play_cap
+		
 	}
 	
 	public function playNext($song_bank){
