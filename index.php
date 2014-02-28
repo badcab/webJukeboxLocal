@@ -16,7 +16,10 @@ require('config.php');
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-4">col-md-4</div>
+			<div class="col-lg-4">
+				<button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>
+				<button type="button" class="btn btn-default btn-lg btn-block">Block level button</button>
+			</div>
 			<div class="col-lg-4">col-md-4</div>
 			<div class="col-lg-4">col-md-4</div>
 		</div>
