@@ -148,8 +148,7 @@ class Player extends Base {
 	
 	public function loadSession($play_cap = 1){
 		$select = $this->db->select()->from('songs')
-			->where('has_player < ?', $play_cap)
-			//also not in queue or in or in head
+			->where('has_player < ?', $play_cap) 
 		;
 		
 		$result = $this->db->fetchAll($select);
@@ -163,11 +162,51 @@ class Player extends Base {
 	}
 	
 	public function playNext($song_bank){
-		//get the path to the next song in the queue
-		//remove that song from the queue
-		//select next winning song and add it to the queue
-		//select 3 songs randomly and add to vote stack (use $song_bank)
-		//return song path to play
+		$select = $this->db->select()->from('queue')
+			->order('id')
+			->limit(HEAT_SIZE)
+		;
+		$result = $this->db->fetchAll($select);
+		$top_vote_song_id = 0;
+		$top_vote_count = 0;
+		foreach($result as $r){
+			$this->_delete($r['id'], 'queue');
+			if($r['votes'] > $top_vote_count){
+				$top_vote_count = $r['votes'];
+				$top_vote_song_id = $r['id'];
+			}
+		}
+		
+		$song = $this->get($top_vote_song_id, 'songs');
+		
+		//randomly select three sonngs to add to the queue
+		//unset those songs from song bank
+		$i = 0;
+		while($i < (int)HEAT_SIZE){
+			$key = array_rand($song_bank);
+			if($song_bank[$key]){
+				shuffle($song_bank[$key]);
+				foreach($song_bank[$key] as $sub_key => $item){
+					if($i >= (int)HEAT_SIZE){
+						break;
+					}
+					$this->_save(array(
+						'song_id' => $item['id'],
+						'btn_label' => $item['name'] . ' - ' . $item['artist'],
+					), 'queue');
+					unset($song_bank[$key][$sub_key]);
+					$i++;
+				}
+			}
+		}
+
+		foreach($song_bank as $key => $sb){
+			if(!$sb){
+				unset($song_bank[$key]);
+			}
+		}
+		
+		return array('song_bank' => $song_bank, 'path' => $song['file_path']);
 	}
 	
 	private function selectWinner(){}
