@@ -8,6 +8,8 @@ if(!defined('ZEND_INCLUDE_PATH')) {define('ZEND_INCLUDE_PATH','..');}
 //if(!defined('MP3_INCLUDE_PATH')) {define('MP3_INCLUDE_PATH','..');}//if this and the zend path were different I would have to put both in the include path but well they are the same
 if(!defined('MUSIC_DIRECTORY')) {define('MUSIC_DIRECTORY','/home/pi/music');}
 
+if(!defined('HEAT_SIZE')) {define('HEAT_SIZE','3');}
+
 set_include_path(get_include_path() . PATH_SEPARATOR . ZEND_INCLUDE_PATH);
 require_once('Zend/Loader.php');
 Zend_Loader::loadClass('Zend_Db');
