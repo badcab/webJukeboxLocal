@@ -215,12 +215,22 @@ class Vote extends Base {
 		parent::__construct(NULL);
 	}
 	
-	public function cast($song_id, $heat_id){
-		//incrament the associated song id vote total by one
+	public function cast($song_id){
+		$select = $this->db->select()->from('queue')
+			->where('song_id = ?', $song_id)
+		;
+		
+		$result = $this->db->fetchRow($select);
+		$result['votes']++;
+		$this->_save($result,'queue');
 	}
 	
-	public function poll($heat_id){
-		//return the current vote counts for a $heat
+	public function poll(){
+		$select = $this->db->select()->from('queue')
+			->order('id')
+			->limit(HEAT_SIZE)
+		;
+		return $this->db->fetchAll($select);
 	}
 }
 ?>
