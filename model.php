@@ -21,6 +21,8 @@ class Base {
 		} catch (Exception $e) {
 			die($e->getMessage() . ' base construct');
 		}
+		
+		$this->db->setFetchMode(Zend_Db::FETCH_ASSOC);
 	}
 
 	public function get($id = NULL, $table = NULL, $pk = NULL){
@@ -29,7 +31,7 @@ class Base {
 		$pk = ($pk) ? $pk : $this->pk;
 		try {
 			$select = $this->db->select()->from($table)->where("{$pk} = ?", $id);
-			return $select->query()->fetch(Zend_Db::FETCH_ASSOC);
+			return $this->db->fetchRow($select);
 		} catch (Exception $e) { 
 			return FALSE;
 		}
@@ -72,7 +74,7 @@ class Base {
 					$select->where("{$key} = ?", $value);
 				}
 			}
-			return $select->query()->fetchAll(Zend_Db::FETCH_ASSOC);
+			return $this->db->fetchAll($select);
 		} catch (Exception $e) { 
 			return FALSE;
 		}
@@ -145,10 +147,12 @@ class Player extends Base {
 	}
 	
 	public function loadSession($play_cap = 1){
-		$result = $this->db->select()->from('songs')
+		$select = $this->db->select()->from('songs')
 			->where('has_player < ?', $play_cap)
 			//also not in queue or in or in head
-		->query()->fetchAll(Zend_Db::FETCH_ASSOC);
+		;
+		
+		$result = $this->db->fetchAll($select);
 		
 		$return = array();
 		foreach($result as $r){
