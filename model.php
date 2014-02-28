@@ -37,7 +37,7 @@ class Base {
 		}
 	}
 
-	public function _delete($id = NULL, $table = NULL, $pk = NULL){ //add option to pass in pk
+	public function _delete($id = NULL, $table = NULL, $pk = NULL){  
 		$id = ($id) ? $id : $this->id;
 		$table = ($table) ? $table : $this->table;
 		$pk = ($pk) ? $pk : $this->pk;
@@ -49,7 +49,7 @@ class Base {
 		}
 	}
 
-	public function _save($data, $table = NULL, $pk = NULL){ //add option to pass in pk
+	public function _save($data, $table = NULL, $pk = NULL){  
 		$table = ($table) ? $table : $this->table;
 		$pk = ($pk) ? $pk : $this->pk;
 		try {
@@ -155,7 +155,7 @@ class Player extends Base {
 		
 		$return = array();
 		foreach($result as $r){
-			$return[$r['category']][] = $r['id'];
+			$return[$r['category']][] = $r;
 		}
 		
 		return $return; 
@@ -178,9 +178,9 @@ class Player extends Base {
 		}
 		
 		$song = $this->get($top_vote_song_id, 'songs');
-		
-		//randomly select three sonngs to add to the queue
-		//unset those songs from song bank
+		$song['has_played']++;
+		$this->_save($song,'songs');
+
 		$i = 0;
 		while($i < (int)HEAT_SIZE){
 			$key = array_rand($song_bank);
@@ -208,10 +208,6 @@ class Player extends Base {
 		
 		return array('song_bank' => $song_bank, 'path' => $song['file_path']);
 	}
-	
-	private function selectWinner(){}
-	
-	private function selectHeat($song_bank){}
 }
 
 class Vote extends Base {
