@@ -16,12 +16,9 @@ require('config.php');
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-10">
-				song name thing... maybe
-			</div>
-			<div class="col-xs-2">
-				vote count thing
-			</div>
+			<div class="col-lg-4">col-md-4</div>
+			<div class="col-lg-4">col-md-4</div>
+			<div class="col-lg-4">col-md-4</div>
 		</div>
 	</div>
 </body>
