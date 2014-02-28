@@ -145,9 +145,17 @@ class Player extends Base {
 	}
 	
 	public function loadSession($play_cap = 1){
-		//get all unplaid songs in associated array
-		//select all songs where playcount is less than play_cap
+		$result = $this->db->select()->from('songs')
+			->where('has_player < ?', $play_cap)
+			//also not in queue or in or in head
+		->query()->fetchAll(Zend_Db::FETCH_ASSOC);
 		
+		$return = array();
+		foreach($result as $r){
+			$return[$r['category']][] = $r['id'];
+		}
+		
+		return $return; 
 	}
 	
 	public function playNext($song_bank){
