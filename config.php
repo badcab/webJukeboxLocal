@@ -4,21 +4,23 @@ if(!defined('DB_USER')) {define('DB_USER','root');}
 if(!defined('DB_PASSWORD')) {define('DB_PASSWORD','password');}
 if(!defined('DB_HOST')) {define('DB_HOST','localhost');}
 
-if(!defined('ZEND_INCLUDE_PATH')) {define('ZEND_INCLUDE_PATH','..');}
-//if(!defined('MP3_INCLUDE_PATH')) {define('MP3_INCLUDE_PATH','..');}//if this and the zend path were different I would have to put both in the include path but well they are the same
+if(!defined('ZEND_INCLUDE_PATH')) {define('ZEND_INCLUDE_PATH','/var/www/ZendFramework-1.12.3/library');}
+
+if(!defined('MP3_INCLUDE_PATH')) {define('MP3_INCLUDE_PATH','../getID3-1.9.7');}
 if(!defined('MUSIC_DIRECTORY')) {define('MUSIC_DIRECTORY','/home/pi/music');}
 
 if(!defined('HEAT_SIZE')) {define('HEAT_SIZE','3');}
 
-set_include_path(get_include_path() . PATH_SEPARATOR . ZEND_INCLUDE_PATH);
+set_include_path(get_include_path() . PATH_SEPARATOR . ZEND_INCLUDE_PATH . PATH_SEPARATOR . MUSIC_DIRECTORY);
+//set_include_path(get_include_path() . PATH_SEPARATOR . MUSIC_DIRECTORY);
 require_once('Zend/Loader.php');
 Zend_Loader::loadClass('Zend_Db');
 include 'model.php';
 session_start();
 date_default_timezone_set('Etc/UTC');
 
-$_bootstrap_css = '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css';
-$_bootstrap_js = '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js';
-$_jquery_js = '//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.0.min.js';
+$_bootstrap_css = '../bootstrap-3.1.1-dist/css/bootstrap.min.css';
+$_bootstrap_js = '../bootstrap-3.1.1-dist/js/bootstrap.min.js';
+$_jquery_js = '../jquery-2.1.0.min.js';
 
 ?>
