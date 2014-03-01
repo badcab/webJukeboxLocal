@@ -44,30 +44,29 @@ if($o == '--bouquet'){
 	exec($play_cmd);
 }
 
-if($o == '--setup'){
-	$Song = new Song();
-	$Player = new Player();
-	$Song->scanMusicDir();
-	$song_bank = $Player->loadSession();
-	for($i=0;$i<7;$i++){
-		$song_bank = $Player->addHeat($song_bank);
-	}
-}
-
-if($o == '--reset'){
+if($o == '--reset' || $o == '--hard-reset'){
+	echo "resetting play count\n";
 	$Song = new Song();
 	$Song->resetPlayCount();
 }
 
 if($o == '--hard-reset'){
-	$cmd = "php " . $argv[0] . " --reset";
-	exec($cmd);
-
+	echo "clearing queue\n";
 	$Queue = new Queue();
 	$Queue->clear();
+}
 
-	$cmd = "php " . $argv[0] . " --setup";
-	exec($cmd);
+if($o == '--setup' || $o == '--hard-reset'){
+	$Song = new Song();
+	$Player = new Player();
+	echo 'indexing ' . MUSIC_DIRECTORY . "\n";
+	$Song->scanMusicDir();
+	$song_bank = $Player->loadSession();
+	echo "\ngenerating queue\n";
+	for($i=0;$i<7;$i++){
+		echo '.';
+		$song_bank = $Player->addHeat($song_bank);
+	}
 }
 
 if($o == '--show-songs'){

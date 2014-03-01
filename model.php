@@ -97,6 +97,7 @@ class Song extends Base {
 		foreach($music_root as $file){
 			if(is_dir(MUSIC_DIRECTORY . '/' . $file) && substr($file, 0, 1) != '.'){
 				foreach(scandir(MUSIC_DIRECTORY . '/' . $file) as $music){
+					echo '.';
 					if(is_file(MUSIC_DIRECTORY . '/' . $file . '/' . $music) && $audio_tag = $getID3->analyze(MUSIC_DIRECTORY . '/' . $file . '/' . $music)){
 						$file_path = MUSIC_DIRECTORY . '/' . $file . '/' . $music;
 						if(isset($audio_tag['tags']['id3v1'])){
@@ -134,7 +135,7 @@ class Song extends Base {
 
 	private function clearSongs(){
 		try {
-			$this->_delete($this->table,"{$this->pk} != 0");
+			$this->db->delete($this->table,"{$this->pk} != 0");
 			return TRUE;
 		} catch (Exception $e) {
 			return FALSE;
@@ -284,7 +285,7 @@ class Queue extends Base {
 	}
 
 	public function clear(){
-		$this->_delete($this->table,array("id != ?" => 0));
+		$this->db->delete($this->table,array("id != ?" => 0));
 	}
 
 }

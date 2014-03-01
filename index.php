@@ -5,6 +5,7 @@ require('config.php');
 <!DOCTYPE html>
 <html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>Web JukeBox</title>
 	<link rel="stylesheet" href="<?= $_bootstrap_css ?>">
@@ -17,8 +18,8 @@ require('config.php');
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 btn btn-primary btn-lg btn-block song-btn" song-id="" id="s1">
-				<span class="pull-left song-name">some text</span>
-				<span class="badge badge-inverse pull-right song-votes">10</span>
+				<span class="pull-left song-name">s1</span>
+				<span class="badge badge-inverse pull-right song-votes">s1</span>
 			</div>
 		</div>
 
@@ -26,8 +27,8 @@ require('config.php');
 
 		<div class="row">
 			<div class="col-xs-12 btn btn-primary btn-lg btn-block song-btn" song-id="" id="s2">
-				<span class="pull-left song-name">some text</span>
-				<span class="badge badge-inverse pull-right song-votes">10</span>
+				<span class="pull-left song-name">s2</span>
+				<span class="badge badge-inverse pull-right song-votes">s2</span>
 			</div>
 		</div>
 
@@ -35,8 +36,8 @@ require('config.php');
 
 		<div class="row">
 			<div class="col-xs-12 btn btn-primary btn-lg btn-block song-btn" song-id="" id="s3">
-				<span class="pull-left song-name">some text</span>
-				<span class="badge badge-inverse pull-right song-votes">10</span>
+				<span class="pull-left song-name">s3</span>
+				<span class="badge badge-inverse pull-right song-votes">s3</span>
 			</div>
 		</div>
 		</div>
