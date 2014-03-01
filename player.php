@@ -7,7 +7,6 @@ $o = $argv[1];
 if($o == '--play'){
 	$Player = new Player();
 	$song_bank = $Player->loadSession();
-	//add a fail safe in case not enogh stuff was returned
 	while(TRUE){
 		$out = $Player->playNext($song_bank);
 		$song_bank = $out['song_bank'];
@@ -18,23 +17,30 @@ if($o == '--play'){
 }
 
 if($o == '--first'){
-	$song = '/path/to/file';
+	$song = '/home/pi/12 Sea of Love.m4a';
 	$play_cmd = "omxplayer " . escapeshellarg($song);
-	echo "playing $song\n";
+	echo "playing {$song}\n";
 	exec($play_cmd);
 }
 
-if($o == '--parent'){
-	$song = '/path/to/file';
+if($o == '--bride-dad'){
+	$song = '/home/pi/14 - Landslide (Remastered LP Version).mp3';
 	$play_cmd = "omxplayer " . escapeshellarg($song);
-	echo "playing $song\n";
+	echo "playing {$song}\n";
 	exec($play_cmd);
 }
 
-if($o == '--other'){
-	$song = '/path/to/file';
+if($o == '--garter'){
+	$song = '/home/pi/11 - My Life (Feat_ Tim Armstrong).mp3';
 	$play_cmd = "omxplayer " . escapeshellarg($song);
-	echo "playing $song\n";
+	echo "playing {$song}\n";
+	exec($play_cmd);
+}
+
+if($o == '--bouquet'){
+	$song = '/home/pi/05 Girlfriend.m4a';
+	$play_cmd = "omxplayer " . escapeshellarg($song);
+	echo "playing {$song}\n";
 	exec($play_cmd);
 }
 
@@ -44,7 +50,7 @@ if($o == '--setup'){
 	$Song->scanMusicDir();
 	$song_bank = $Player->loadSession();
 	for($i=0;$i<7;$i++){
-		$Player->playNext($song_bank);
+		$song_bank = $Player->addHeat($song_bank);
 	}
 }
 
@@ -82,7 +88,12 @@ if($o == '--help'){
 	echo"--reset \tset play count to all songs to 0\n";
 	echo"--hard-reset \tclear queue set play count to 0 and reindex\n";
 	echo"--show-songs \tshow songs without play count\n";
-	//add some lines here for particular songs
+
+	echo"--first \tplay first bride groom dance\n";
+	echo"--bride-dad \tplay bride father dance\n";
+	echo"--garter \tplay garter toss song\n";
+	echo"--bouquet \tplay bouquet toss song\n";
+
 	echo"addr: \t\thttp://" . exec("ifconfig | grep 192.168 | cut -d':' -f2 | cut -d' ' -f1") . "/webJukeboxLocal\n";
 }
 
