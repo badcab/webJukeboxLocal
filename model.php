@@ -109,11 +109,12 @@ class Song extends Base {
 						} elseif(isset($audio_tag['tags']['quicktime'])) {
 							$dir[] = array(
 								'file_path' => $file_path,
-								'name' => $audio_tag['tags']['quicktime']['title'][0],
-								'artist' => $audio_tag['tags']['quicktime']['artist'][0],
+								'name' => @$audio_tag['tags']['quicktime']['title'][0],
+								'artist' => @$audio_tag['tags']['quicktime']['artist'][0],
 		//the above two lines are showing as unidex notice
 								'category' => $file,
 							);
+
 						} elseif (isset($audio_tag['tags']['id3v2'])) {
 							$dir[] = array(
 								'file_path' => $file_path,
@@ -181,7 +182,7 @@ class Player extends Base {
 					), 'queue');
 
 					$item['has_played']++;
-					$this->_save($item)
+					$this->_save($item);
 
 					unset($song_bank[$key][$sub_key]);
 					$i++;
@@ -232,7 +233,7 @@ class Player extends Base {
 					), 'queue');
 
 					$item['has_played']++;
-					$this->_save($item)
+					$this->_save($item);
 
 					unset($song_bank[$key][$sub_key]);
 					$i++;
@@ -265,8 +266,9 @@ class Vote extends Base {
 		$this->_save($result,'queue');
 	}
 
-	public function poll(){
+	public function poll($offset = 0){
 		$select = $this->db->select()->from('queue')
+			->where('id > ?', $offset)
 			->order('id')
 			->limit(HEAT_SIZE)
 		;

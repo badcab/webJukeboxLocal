@@ -16,27 +16,27 @@ require('config.php');
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12 btn btn-primary btn-lg btn-block">
-				<span class="pull-left">some text</span>
-				<span class="badge badge-inverse pull-right">10</span>
+			<div class="col-xs-12 btn btn-primary btn-lg btn-block song-btn" song-id="" id="s1">
+				<span class="pull-left song-name">some text</span>
+				<span class="badge badge-inverse pull-right song-votes">10</span>
 			</div>
 		</div>
 
 		<div class="row"><div class="col-xs-12"></div></div>
 
 		<div class="row">
-			<div class="col-xs-12 btn btn-primary btn-lg btn-block">
-				<span class="pull-left">some text</span>
-				<span class="badge badge-inverse pull-right">10</span>
+			<div class="col-xs-12 btn btn-primary btn-lg btn-block song-btn" song-id="" id="s2">
+				<span class="pull-left song-name">some text</span>
+				<span class="badge badge-inverse pull-right song-votes">10</span>
 			</div>
 		</div>
 
 		<div class="row"><div class="col-xs-12"></div></div>
 
 		<div class="row">
-			<div class="col-xs-12 btn btn-primary btn-lg btn-block">
-				<span class="pull-left">some text</span>
-				<span class="badge badge-inverse pull-right">10</span>
+			<div class="col-xs-12 btn btn-primary btn-lg btn-block song-btn" song-id="" id="s3">
+				<span class="pull-left song-name">some text</span>
+				<span class="badge badge-inverse pull-right song-votes">10</span>
 			</div>
 		</div>
 		</div>

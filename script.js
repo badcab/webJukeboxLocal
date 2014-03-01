@@ -2,7 +2,14 @@ $(function(){
 	window.setInterval(function(){poll()},3000);
 
 	$('#skip').on('click',function(){
+		thinking_overlay();
 		skip();
+	});
+
+	$('.song-btn').on('click',function(){
+		thinking_overlay();
+		var song_id = $(this).attr('song-id');
+		vote(song_id);
 	});
 });
 
@@ -16,21 +23,31 @@ function thinking_overlay(){
 }
 
 function poll(){
-	//check for new vote totals
-	console.log('poll called');
 	$.ajax({
 		url: 'rpc.php',
 		type: 'POST',
 		data: {action: 'poll'},
 	})
-	.done(function() {
-		console.log("success vote");
+	.done(function(result) {
+		console.log("success poll");
+
+		$('#s1').find('.song-name').html(result.payload.s1.btn_label);
+		$('#s1').find('.song-votes').html(result.payload.s1.votes);
+		$('#s1').attr('song-id', result.payload.s1.song_id);
+
+		$('#s2').find('.song-name').html(result.payload.s2.btn_label);
+		$('#s2').find('.song-votes').html(result.payload.s2.votes);
+		$('#s2').attr('song-id', result.payload.s2.song_id);
+
+		$('#s3').find('.song-name').html(result.payload.s3.btn_label);
+		$('#s3').find('.song-votes').html(result.payload.s3.votes);
+		$('#s3').attr('song-id', result.payload.s3.song_id);
 	})
 	.fail(function() {
-		console.log("error vote");
+		console.log("error poll");
 	})
 	.always(function() {
-		console.log("complete vote");
+		console.log("complete poll");
 	});
 }
 
@@ -42,13 +59,13 @@ function vote(song_id){
 		data: {song_id: song_id, action: 'vote'},
 	})
 	.done(function() {
-		console.log("success vote");
+		poll();
 	})
 	.fail(function() {
 		console.log("error vote");
 	})
 	.always(function() {
-		console.log("complete vote");
+		remove_overlay();
 	});
 
 }
@@ -60,12 +77,12 @@ function skip(){
 		data: {action: 'skip'},
 	})
 	.done(function() {
-		console.log("success skip");
+		poll();
 	})
 	.fail(function() {
 		console.log("error skip");
 	})
 	.always(function() {
-		console.log("complete skip");
+		remove_overlay();
 	});
 }
