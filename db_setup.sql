@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `queue` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `song_id` int(11) unsigned NOT NULL,
   `votes` int(11) unsigned NOT NULL DEFAULT 0,
-  `btn_label` int(11)  NOT NULL DEFAULT 'UNKNOWN',
+  `btn_label` varchar(255)  NOT NULL DEFAULT 'UNKNOWN',
   PRIMARY KEY (`id`),
   FOREIGN KEY (`song_id`) REFERENCES `songs`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

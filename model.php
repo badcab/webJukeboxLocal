@@ -21,7 +21,7 @@ class Base {
 		} catch (Exception $e) {
 			die($e->getMessage() . ' base construct');
 		}
-		
+
 		$this->db->setFetchMode(Zend_Db::FETCH_ASSOC);
 	}
 
@@ -32,24 +32,24 @@ class Base {
 		try {
 			$select = $this->db->select()->from($table)->where("{$pk} = ?", $id);
 			return $this->db->fetchRow($select);
-		} catch (Exception $e) { 
+		} catch (Exception $e) {
 			return FALSE;
 		}
 	}
 
-	public function _delete($id = NULL, $table = NULL, $pk = NULL){  
+	public function _delete($id = NULL, $table = NULL, $pk = NULL){
 		$id = ($id) ? $id : $this->id;
 		$table = ($table) ? $table : $this->table;
 		$pk = ($pk) ? $pk : $this->pk;
 		try {
 			$this->db->delete($table,array("{$pk} = ?" => $id));
 			return TRUE;
-		} catch (Exception $e) { 
+		} catch (Exception $e) {
 			return FALSE;
 		}
 	}
 
-	public function _save($data, $table = NULL, $pk = NULL){  
+	public function _save($data, $table = NULL, $pk = NULL){
 		$table = ($table) ? $table : $this->table;
 		$pk = ($pk) ? $pk : $this->pk;
 		try {
@@ -60,13 +60,13 @@ class Base {
 				$this->db->insert($table, $data);
 				return $this->db->lastInsertId();
 			}
-		} catch (Exception $e) { 
+		} catch (Exception $e) {
 			return FALSE;
 		}
 	}
 
 	public function getAll(array $filter = array(), $table = NULL){
-		$table = ($table) ? $table : $this->table; 
+		$table = ($table) ? $table : $this->table;
 		try {
 			$select = $this->db->select()->from($table);
 			if(count($filter)){
@@ -75,7 +75,7 @@ class Base {
 				}
 			}
 			return $this->db->fetchAll($select);
-		} catch (Exception $e) { 
+		} catch (Exception $e) {
 			return FALSE;
 		}
 	}
@@ -111,6 +111,7 @@ class Song extends Base {
 								'file_path' => $file_path,
 								'name' => $audio_tag['tags']['quicktime']['title'][0],
 								'artist' => $audio_tag['tags']['quicktime']['artist'][0],
+		//the above two lines are showing as unidex notice
 								'category' => $file,
 							);
 						} elseif (isset($audio_tag['tags']['id3v2'])) {
@@ -132,35 +133,38 @@ class Song extends Base {
 
 	private function clearSongs(){
 		try {
-			$this->db->_delete($this->table,"{$this->pk} != 0");
+			$this->_delete($this->table,"{$this->pk} != 0");
 			return TRUE;
 		} catch (Exception $e) {
-			$this->debug($e->getMessage(),'base delete');
 			return FALSE;
 		}
+	}
+
+	public function resetPlayCount(){
+		$this->db->update('songs',array('has_played' => 0),array('id != ?' => '0'));
 	}
 }
 
 class Player extends Base {
-	function __construct(){ 
+	function __construct(){
 		parent::__construct(NULL);
 	}
-	
+
 	public function loadSession($play_cap = 1){
 		$select = $this->db->select()->from('songs')
-			->where('has_player < ?', $play_cap) 
+			->where('has_played < ?', $play_cap)
 		;
-		
+
 		$result = $this->db->fetchAll($select);
-		
+
 		$return = array();
 		foreach($result as $r){
 			$return[$r['category']][] = $r;
 		}
-		
-		return $return; 
+
+		return $return;
 	}
-	
+
 	public function playNext($song_bank){
 		$select = $this->db->select()->from('queue')
 			->order('id')
@@ -176,7 +180,7 @@ class Player extends Base {
 				$top_vote_song_id = $r['id'];
 			}
 		}
-		
+
 		$song = $this->get($top_vote_song_id, 'songs');
 		$song['has_played']++;
 		$this->_save($song,'songs');
@@ -205,26 +209,26 @@ class Player extends Base {
 				unset($song_bank[$key]);
 			}
 		}
-		
+
 		return array('song_bank' => $song_bank, 'path' => $song['file_path']);
 	}
 }
 
 class Vote extends Base {
-	function __construct(){ 
+	function __construct(){
 		parent::__construct(NULL);
 	}
-	
+
 	public function cast($song_id){
 		$select = $this->db->select()->from('queue')
 			->where('song_id = ?', $song_id)
 		;
-		
+
 		$result = $this->db->fetchRow($select);
 		$result['votes']++;
 		$this->_save($result,'queue');
 	}
-	
+
 	public function poll(){
 		$select = $this->db->select()->from('queue')
 			->order('id')
@@ -232,5 +236,18 @@ class Vote extends Base {
 		;
 		return $this->db->fetchAll($select);
 	}
+}
+
+class Queue extends Base {
+	function __construct(){
+		$table = 'queue';
+		$pk = 'id';
+		parent::__construct($table);
+	}
+
+	public function clear(){
+		$this->_delete($this->table,array("id != ?" => 0));
+	}
+
 }
 ?>

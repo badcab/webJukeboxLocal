@@ -11,7 +11,7 @@ if(!defined('MUSIC_DIRECTORY')) {define('MUSIC_DIRECTORY','/home/pi/music');}
 
 if(!defined('HEAT_SIZE')) {define('HEAT_SIZE','3');}
 
-set_include_path(get_include_path() . PATH_SEPARATOR . ZEND_INCLUDE_PATH . PATH_SEPARATOR . MUSIC_DIRECTORY);
+set_include_path(get_include_path() . PATH_SEPARATOR . ZEND_INCLUDE_PATH . PATH_SEPARATOR . MP3_INCLUDE_PATH);
 //set_include_path(get_include_path() . PATH_SEPARATOR . MUSIC_DIRECTORY);
 require_once('Zend/Loader.php');
 Zend_Loader::loadClass('Zend_Db');
