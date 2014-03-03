@@ -17,7 +17,7 @@ require('config.php');
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12 btn btn-primary btn-lg btn-block song-btn" song-id="" id="s1">
+			<div class="col-xs-12 song-btn" song-id="" id="s1">
 				<span class="pull-left song-name">s1</span>
 				<span class="badge badge-inverse pull-right song-votes">s1</span>
 			</div>
