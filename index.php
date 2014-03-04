@@ -10,6 +10,7 @@ require('config.php');
 	<title>Web JukeBox</title>
 	<link rel="stylesheet" href="<?= $_bootstrap_css ?>">
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="button.css">
 	<script src="<?= $_jquery_js ?>"></script>
 	<script src="<?= $_bootstrap_js ?>"></script>
 	<script src="script.js"></script>
