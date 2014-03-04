@@ -4,7 +4,7 @@ if(!defined('DB_USER')) {define('DB_USER','root');}
 if(!defined('DB_PASSWORD')) {define('DB_PASSWORD','password');}
 if(!defined('DB_HOST')) {define('DB_HOST','localhost');}
 
-if(!defined('ZEND_INCLUDE_PATH')) {define('ZEND_INCLUDE_PATH','/var/www/ZendFramework-1.12.3/library');}
+if(!defined('ZEND_INCLUDE_PATH')) {define('ZEND_INCLUDE_PATH','../ZendFramework-1.12.3/library');}
 
 if(!defined('MP3_INCLUDE_PATH')) {define('MP3_INCLUDE_PATH','../getID3-1.9.7');}
 if(!defined('MUSIC_DIRECTORY')) {define('MUSIC_DIRECTORY','/home/pi/music');}
@@ -16,7 +16,6 @@ require_once('Zend/Loader.php');
 Zend_Loader::loadClass('Zend_Db');
 include 'model.php';
 session_start();
-date_default_timezone_set('Etc/UTC');
 
 $_bootstrap_css = '../bootstrap-3.1.1-dist/css/bootstrap.min.css';
 $_bootstrap_js = '../bootstrap-3.1.1-dist/js/bootstrap.min.js';

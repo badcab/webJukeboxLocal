@@ -1,13 +1,9 @@
 <?php
 require('config.php');
 
-
-
 foreach ($_POST as $key => $value) {
 	$$key = $value;
 }
-
-
 
 $result = array(
 	'success' => 1,
@@ -26,15 +22,10 @@ if(!$currentHeat){
 
 if($action == 'poll'){
 	$i = 1;
-
-
-//echo print_r($currentHeat,TRUE);
-
 	foreach ($currentHeat as $key => $value) {
 		$result['payload']["s{$i}"] = $value;
 		$i++;
 	}
-
 } elseif($action == 'vote'){
 	$Vote->cast($song_id);
 	foreach ($currentHeat as $key => $value) {
@@ -48,5 +39,4 @@ if($action == 'poll'){
 
 header('Content-Type: application/json');
 echo json_encode($result);
-
 ?>

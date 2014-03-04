@@ -20,11 +20,3 @@ CREATE TABLE IF NOT EXISTS `queue` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`song_id`) REFERENCES `songs`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
-/*
-a heat will just be the top three things
-will do a nice select on this
-*/
-
-
-

@@ -1,5 +1,4 @@
 <?php
-//use zend put it all in this file since it will be small there is not much need to seperate it out
 class Base {
 	protected $table;
 	protected $pk;
@@ -163,7 +162,6 @@ class Player extends Base {
 		foreach($result as $r){
 			$return[$r['category']][] = $r;
 		}
-
 		return $return;
 	}
 
@@ -178,8 +176,8 @@ class Player extends Base {
 						break;
 					}
 					$this->_save(array(
-						'song_id' => $item['id'],
-						'btn_label' => $item['name'] . ' - ' . $item['artist'],
+						'song_id' => (int)$item['id'],
+						'btn_label' => trim($item['name']) . '<br/>By: ' . trim($item['artist']),
 					), 'queue');
 
 					$item['has_played']++;
@@ -196,7 +194,6 @@ class Player extends Base {
 				unset($song_bank[$key]);
 			}
 		}
-
 		return $song_bank;
 	}
 
@@ -229,8 +226,8 @@ class Player extends Base {
 						break;
 					}
 					$this->_save(array(
-						'song_id' => $item['id'],
-						'btn_label' => $item['name'] . ' - ' . $item['artist'],
+						'song_id' => (int)$item['id'],
+						'btn_label' => trim($item['name']) . '<br/>By: ' . trim($item['artist']),
 					), 'queue');
 
 					$item['has_played']++;
@@ -247,7 +244,6 @@ class Player extends Base {
 				unset($song_bank[$key]);
 			}
 		}
-
 		return array('song_bank' => $song_bank, 'path' => $song['file_path']);
 	}
 }
@@ -261,7 +257,6 @@ class Vote extends Base {
 		$select = $this->db->select()->from('queue')
 			->where('song_id = ?', $song_id)
 		;
-
 		$result = $this->db->fetchRow($select);
 		$result['votes']++;
 		$this->_save($result,'queue');
@@ -287,6 +282,5 @@ class Queue extends Base {
 	public function clear(){
 		$this->db->delete($this->table,array("id != ?" => 0));
 	}
-
 }
 ?>
