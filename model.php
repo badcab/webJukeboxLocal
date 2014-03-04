@@ -204,7 +204,7 @@ class Player extends Base {
 		;
 		$result = $this->db->fetchAll($select);
 		$top_vote_song_id = 0;
-		$top_vote_count = 0;
+		$top_vote_count = -1;
 		foreach($result as $r){
 			$this->_delete($r['id'], 'queue');
 			if($r['votes'] > $top_vote_count){
