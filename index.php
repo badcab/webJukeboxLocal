@@ -14,37 +14,25 @@
 </head>
 <body>
 	<div class="container">
+
+	<?php for($i=0;$i<HEAT_SIZE;$i++): ?>
 		<div class="row">
-			<div class="col-xs-12 btn btn-block classy-btn song-btn" song-id="" id="s1">
+			<div class="col-xs-12 classy-btn song-btn" song-id="" id="s<?= $i+1 ?>">
 				<span class="song-name"></span>
 				<span class="badge badge-inverse pull-right song-votes"></span>
 			</div>
 		</div>
 
 		<div class="row"><div class="col-xs-12"></div></div>
+	<?php endfor; ?>
 
-		<div class="row">
-			<div class="col-xs-12 btn btn-block classy-btn song-btn" song-id="" id="s2">
-				<span class="song-name"></span>
-				<span class="badge badge-inverse pull-right song-votes"></span>
-			</div>
-		</div>
 
-		<div class="row"><div class="col-xs-12"></div></div>
-
-		<div class="row">
-			<div class="col-xs-12 btn btn-block classy-btn song-btn" song-id="" id="s3">
-				<span class="song-name"></span>
-				<span class="badge badge-inverse pull-right song-votes"></span>
-			</div>
-		</div>
-		</div>
 	</div>
 
 	<div class="modal"><h1></h1></div>
 
-	<div class="navbar navbar-fixed-bottom btn btn-block classy-btn" id="skip">
-		Skip
+	<div class="navbar navbar-fixed-bottom classy-btn" id="skip">
+		<span class="song-name">Skip</span>
 	</div>
 </body>
 </html>

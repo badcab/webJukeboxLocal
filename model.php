@@ -175,9 +175,13 @@ class Player extends Base {
 					if($i >= (int)HEAT_SIZE){
 						break;
 					}
+
+					$tmp = explode('(', $item['name']);
+					$_item = explode('[', $tmp[0]);
+
 					$this->_save(array(
 						'song_id' => (int)$item['id'],
-						'btn_label' => trim($item['name']) . '<br/>By: ' . trim($item['artist']),
+						'btn_label' => trim($_item[0]) . '<br/>By: ' . trim($item['artist']),
 					), 'queue');
 
 					$item['has_played']++;
@@ -225,9 +229,12 @@ class Player extends Base {
 					if($i >= (int)HEAT_SIZE){
 						break;
 					}
+					$tmp = explode('(', $item['name']);
+					$_item = explode('[', $tmp[0]);
+
 					$this->_save(array(
 						'song_id' => (int)$item['id'],
-						'btn_label' => trim($item['name']) . '<br/>By: ' . trim($item['artist']),
+						'btn_label' => trim($_item[0]) . '<br/>By: ' . trim($item['artist']),
 					), 'queue');
 
 					$item['has_played']++;

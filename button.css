@@ -7,3 +7,8 @@
 	font-weight: bold;
 	padding: 2px;
  }
+
+.song-name{
+	margin: 0 auto !important;
+	float: none !important;
+}
