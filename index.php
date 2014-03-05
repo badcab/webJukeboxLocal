@@ -15,27 +15,27 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12 classy-btn song-btn" song-id="" id="s1">
-				<span class="pull-left song-name">s1</span>
-				<span class="badge badge-inverse pull-right song-votes">s1</span>
+			<div class="col-xs-12 btn btn-block classy-btn song-btn" song-id="" id="s1">
+				<span class="song-name"></span>
+				<span class="badge badge-inverse pull-right song-votes"></span>
 			</div>
 		</div>
 
 		<div class="row"><div class="col-xs-12"></div></div>
 
 		<div class="row">
-			<div class="col-xs-12 classy-btn song-btn" song-id="" id="s2">
-				<span class="pull-left song-name">s2</span>
-				<span class="badge badge-inverse pull-right song-votes">s2</span>
+			<div class="col-xs-12 btn btn-block classy-btn song-btn" song-id="" id="s2">
+				<span class="song-name"></span>
+				<span class="badge badge-inverse pull-right song-votes"></span>
 			</div>
 		</div>
 
 		<div class="row"><div class="col-xs-12"></div></div>
 
 		<div class="row">
-			<div class="col-xs-12 classy-btn song-btn" song-id="" id="s3">
-				<span class="pull-left song-name">s3</span>
-				<span class="badge badge-inverse pull-right song-votes">s3</span>
+			<div class="col-xs-12 btn btn-block classy-btn song-btn" song-id="" id="s3">
+				<span class="song-name"></span>
+				<span class="badge badge-inverse pull-right song-votes"></span>
 			</div>
 		</div>
 		</div>
@@ -43,7 +43,7 @@
 
 	<div class="modal"><h1></h1></div>
 
-	<div class="navbar navbar-fixed-bottom classy-btn" id="skip">
+	<div class="navbar navbar-fixed-bottom btn btn-block classy-btn" id="skip">
 		Skip
 	</div>
 </body>
