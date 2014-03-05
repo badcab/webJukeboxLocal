@@ -186,7 +186,7 @@ class Player extends Base {
 					), 'queue');
 
 					$item['has_played']++;
-$this->_save(array('id' => $item['id'], 'has_played' => $item['has_played']),'songs');
+					$this->_save(array('id' => $item['id'], 'has_played' => $item['has_played']),'songs');
 
 					unset($song_bank[$key][$sub_key]);
 					$i++;
@@ -220,38 +220,8 @@ $this->_save(array('id' => $item['id'], 'has_played' => $item['has_played']),'so
 
 		$song = $this->get($top_vote_song_id, 'songs');
 
-		$i = 0;
-		while($i < (int)HEAT_SIZE){
-			$key = array_rand($song_bank);
-			if($song_bank[$key]){
-				shuffle($song_bank[$key]);
-				foreach($song_bank[$key] as $sub_key => $item){
-					if($i >= (int)HEAT_SIZE){
-						break;
-					}
-					$tmp = explode('(', $item['name']);
-					$pmt = explode('[', $tmp[0]);
-					$item['name'] = $pmt[0];
+		$song_bank = $this->addHeat($song_bank);
 
-					$this->_save(array(
-						'song_id' => (int)$item['id'],
-						'btn_label' => trim($item['name']) . '<br/>By: ' . trim($item['artist']),
-					), 'queue');
-
-					$item['has_played']++;
-					$this->_save(array('id' => $item['id'], 'has_played' => $item['has_played']),'songs');
-
-					unset($song_bank[$key][$sub_key]);
-					$i++;
-				}
-			}
-		}
-
-		foreach($song_bank as $key => $sb){
-			if(!$sb){
-				unset($song_bank[$key]);
-			}
-		}
 		return array('song_bank' => $song_bank, 'path' => $song['file_path']);
 	}
 }
