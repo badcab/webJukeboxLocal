@@ -6,6 +6,9 @@
 	font-family: arial;
 	font-weight: bold;
 	padding: 2px;
+	border-radius:25px;
+	padding:10px 40px; 
+	border:2px solid #a1a1a1;
  }
 
 .song-name{
