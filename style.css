@@ -28,3 +28,7 @@ html.loading .modal {
 body{
 	background-color: gray !important;
 }
+
+.space{
+	padding: 10px;
+}

@@ -12,6 +12,7 @@ if($o == '--play'){
 		$song_bank = $out['song_bank'];
 		$play_cmd = "omxplayer " . escapeshellarg($out['path']);
 		echo "playing {$out['path']} \n";
+		//echo $play_cmd . "\n";
 		exec($play_cmd);
 	}
 }

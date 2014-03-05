@@ -177,15 +177,16 @@ class Player extends Base {
 					}
 
 					$tmp = explode('(', $item['name']);
-					$_item = explode('[', $tmp[0]);
+					$pmt = explode('[', $tmp[0]);
+					$item['name'] = $pmt[0];
 
 					$this->_save(array(
 						'song_id' => (int)$item['id'],
-						'btn_label' => trim($_item[0]) . '<br/>By: ' . trim($item['artist']),
+						'btn_label' => trim($item['name']) . '<br/>By: ' . trim($item['artist']),
 					), 'queue');
 
 					$item['has_played']++;
-					$this->_save($item);
+$this->_save(array('id' => $item['id'], 'has_played' => $item['has_played']),'songs');
 
 					unset($song_bank[$key][$sub_key]);
 					$i++;
@@ -213,12 +214,11 @@ class Player extends Base {
 			$this->_delete($r['id'], 'queue');
 			if($r['votes'] > $top_vote_count){
 				$top_vote_count = $r['votes'];
-				$top_vote_song_id = $r['id'];
+				$top_vote_song_id = $r['song_id'];
 			}
 		}
 
 		$song = $this->get($top_vote_song_id, 'songs');
-		$this->_save($song,'songs');
 
 		$i = 0;
 		while($i < (int)HEAT_SIZE){
@@ -230,15 +230,16 @@ class Player extends Base {
 						break;
 					}
 					$tmp = explode('(', $item['name']);
-					$_item = explode('[', $tmp[0]);
+					$pmt = explode('[', $tmp[0]);
+					$item['name'] = $pmt[0];
 
 					$this->_save(array(
 						'song_id' => (int)$item['id'],
-						'btn_label' => trim($_item[0]) . '<br/>By: ' . trim($item['artist']),
+						'btn_label' => trim($item['name']) . '<br/>By: ' . trim($item['artist']),
 					), 'queue');
 
 					$item['has_played']++;
-					$this->_save($item);
+					$this->_save(array('id' => $item['id'], 'has_played' => $item['has_played']),'songs');
 
 					unset($song_bank[$key][$sub_key]);
 					$i++;

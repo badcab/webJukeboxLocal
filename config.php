@@ -9,7 +9,7 @@ if(!defined('ZEND_INCLUDE_PATH')) {define('ZEND_INCLUDE_PATH','../ZendFramework-
 if(!defined('MP3_INCLUDE_PATH')) {define('MP3_INCLUDE_PATH','../getID3-1.9.7');}
 if(!defined('MUSIC_DIRECTORY')) {define('MUSIC_DIRECTORY','/home/pi/music');}
 
-if(!defined('HEAT_SIZE')) {define('HEAT_SIZE',3);}
+if(!defined('HEAT_SIZE')) {define('HEAT_SIZE',4);}
 
 set_include_path(get_include_path() . PATH_SEPARATOR . ZEND_INCLUDE_PATH . PATH_SEPARATOR . MP3_INCLUDE_PATH);
 require_once('Zend/Loader.php');
