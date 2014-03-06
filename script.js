@@ -7,9 +7,8 @@ $(function(){
 		skip();
 	});
 
-	$('.song-btn').on('click',function(){
-		var name = $(this).find('.song-name').html();
-		vote($(this).attr('song-id'), name);
+	$('.song-btn').on('click',function(){ 
+		vote($(this).attr('song-id'), $(this).find('.song-name').html());
 	});
 });
 
@@ -17,8 +16,8 @@ function remove_overlay(){
    $('html').removeClass("loading");
 }
 
-function thinking_overlay(message, label){
-	$('.modal h1').html(message + '<br/>' + label);
+function thinking_overlay(message){
+	$('.modal h1').html(message);
 	$('html').addClass("loading");
 }
 
@@ -37,8 +36,8 @@ function poll(){
 	});
 }
 
-function vote(song_id, name){
-	thinking_overlay('casting vote for', name);
+function vote(song_id, title){
+	thinking_overlay('casting vote for<br/>' + title);
 	$.ajax({
 		url: 'rpc.php',
 		type: 'POST',
@@ -55,7 +54,7 @@ function vote(song_id, name){
 }
 
 function skip(){
-	thinking_overlay('skipping', 'vote');
+	thinking_overlay('skipping vote');
 	$.ajax({
 		url: 'rpc.php',
 		type: 'POST',
