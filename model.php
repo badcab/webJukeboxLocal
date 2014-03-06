@@ -175,10 +175,12 @@ class Player extends Base {
 					if($i >= (int)HEAT_SIZE){
 						break;
 					}
-
-					$tmp = explode('(', $item['name']);
-					$pmt = explode('[', $tmp[0]);
-					$item['name'] = $pmt[0];
+					$item['name'] = trim($item['name']);
+					if($item['name'][0] != '(' && $item['name'][0] != '['){
+						$tmp = explode('(', $item['name']);
+						$pmt = explode('[', $tmp[0]);
+						$item['name'] = $pmt[0];
+					}
 
 					$this->_save(array(
 						'song_id' => (int)$item['id'],
