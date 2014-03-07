@@ -40,6 +40,10 @@ echo ' cgi.assign = (".php" => "/usr/bin/php5-cgi")' >> /etc/lighttpd/conf-enabl
 
 /etc/init.d/lighttpd force-reload
 
+lighty-enable-mod fastcgi-php
+
+/etc/init.d/lighttpd force-reload
+
 #run the sql file in /var/www/webJukeboxLocal/db_setup.sql
 
 chown -R www-data:www-data /var/www
