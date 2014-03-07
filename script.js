@@ -1,5 +1,7 @@
 $(function(){
 	poll();
+	thinking_overlay('Loading');
+	remove_overlay();
 
 	window.setInterval(function(){poll()},3000);
 
