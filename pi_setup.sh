@@ -1,11 +1,5 @@
 #!/bin/bash
-
-echo 'deb http://www.deb-multimedia.org wheezy main non-free' >> /etc/apt/sources.list
-
 apt-get update
-
-apt-get -y --force-yes install deb-multimedia-keyring
-#to to then tell the sytem to use this key ring
 
 apt-get -y upgrade
 
@@ -15,7 +9,6 @@ addgroup --system www-data
 adduser www-data www-data
 
 apt-get -y install lighttpd mysql-server php5-cgi php5-mysql php5-cli git
-#likely have to add the requirements to install m4a playback and tag reading
 
 usermod -a -G www-data www-data
 usermod -a -G www-data pi
@@ -37,7 +30,6 @@ unzip /var/www/bootstrap-3.1.1-dist.zip
 
 mysql -u root -p
 
-#might get an ssh type error, consider making this a fork or something
 git clone git@github.com:badcab/webJukeboxLocal.git
 
 sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=1/g' /etc/php5/cgi/php.ini
@@ -50,7 +42,9 @@ lighty-enable-mod fastcgi-php
 
 /etc/init.d/lighttpd force-reload
 
-#run the sql file in /var/www/webJukeboxLocal/db_setup.sql
+mysql -u root < /var/www/webJukeboxLocal/db_setup.sql
 
 chown -R www-data:www-data /var/www
 
+#dpkg-reconfigure console-setup
+#will change font size

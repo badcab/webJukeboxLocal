@@ -109,13 +109,13 @@ class Song extends Base {
 								'category' => $file,
 							);
 						} elseif(isset($audio_tag['tags']['quicktime'])) {
-							$dir[] = array(
+							//can not longer use iTunes, maybe a later update to getID3 will change this
+							/*$dir[] = array(
 								'file_path' => $file_path,
 								'name' => $audio_tag['tags']['quicktime']['title'][0],
 								'artist' => $audio_tag['tags']['quicktime']['artist'][0],
 								'category' => $file,
-							);
-
+							);*/
 						} elseif (isset($audio_tag['tags']['id3v2'])) {
 							$dir[] = array(
 								'file_path' => $file_path,
