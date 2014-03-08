@@ -97,6 +97,8 @@ class Song extends Base {
 			if(is_dir(MUSIC_DIRECTORY . '/' . $file) && substr($file, 0, 1) != '.'){
 				foreach(scandir(MUSIC_DIRECTORY . '/' . $file) as $music){
 					echo '.';
+//echo print_r($getID3->analyze(MUSIC_DIRECTORY . '/' . $file . '/' . $music),TRUE);
+
 					if(is_file(MUSIC_DIRECTORY . '/' . $file . '/' . $music) && $audio_tag = $getID3->analyze(MUSIC_DIRECTORY . '/' . $file . '/' . $music)){
 						$file_path = MUSIC_DIRECTORY . '/' . $file . '/' . $music;
 						if(isset($audio_tag['tags']['id3v1'])){
@@ -109,9 +111,8 @@ class Song extends Base {
 						} elseif(isset($audio_tag['tags']['quicktime'])) {
 							$dir[] = array(
 								'file_path' => $file_path,
-								'name' => @$audio_tag['tags']['quicktime']['title'][0],
-								'artist' => @$audio_tag['tags']['quicktime']['artist'][0],
-		//the above two lines are showing as unidex notice
+								'name' => $audio_tag['tags']['quicktime']['title'][0],
+								'artist' => $audio_tag['tags']['quicktime']['artist'][0],
 								'category' => $file,
 							);
 

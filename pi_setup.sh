@@ -1,5 +1,12 @@
 #!/bin/bash
+
+echo 'deb http://www.deb-multimedia.org wheezy main non-free' >> /etc/apt/sources.list
+
 apt-get update
+
+apt-get -y --force-yes install deb-multimedia-keyring
+#to to then tell the sytem to use this key ring
+
 apt-get -y upgrade
 
 ssh-keygen -t rsa
@@ -8,6 +15,7 @@ addgroup --system www-data
 adduser www-data www-data
 
 apt-get -y install lighttpd mysql-server php5-cgi php5-mysql php5-cli git
+#likely have to add the requirements to install m4a playback and tag reading
 
 usermod -a -G www-data www-data
 usermod -a -G www-data pi
@@ -18,16 +26,14 @@ chmod -R g+w /var/www
 find /var/www -type d -exec chmod 2775 {} \;
 find /var/www -type f -exec chmod ug+rw {} \;
 
-cd /var/www #I don't know if this is how i do it or not
+wget https://packages.zendframework.com/releases/ZendFramework-1.12.3/ZendFramework-1.12.3.zip /var/www
+wget https://github.com/JamesHeinrich/getID3/archive/1.9.7.zip /var/www
+wget https://github.com/twbs/bootstrap/releases/download/v3.1.1/bootstrap-3.1.1-dist.zip /var/www
+wget http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.0.min.js /var/www
 
-wget https://packages.zendframework.com/releases/ZendFramework-1.12.3/ZendFramework-1.12.3.zip
-wget https://github.com/JamesHeinrich/getID3/archive/1.9.7.zip
-wget https://github.com/twbs/bootstrap/releases/download/v3.1.1/bootstrap-3.1.1-dist.zip
-wget http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.0.min.js
-
-unzip ZendFramework-1.12.3.zip
-unzip getID3-1.9.7.zip
-unzip bootstrap-3.1.1-dist.zip
+unzip /var/www/ZendFramework-1.12.3.zip
+unzip /var/www/getID3-1.9.7.zip
+unzip /var/www/bootstrap-3.1.1-dist.zip
 
 mysql -u root -p
 
