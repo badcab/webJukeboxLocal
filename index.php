@@ -1,4 +1,7 @@
-<?php require('config.php');?>
+<?php 
+	require('config.php');
+	$_SESSION['heat'] = 0;	
+?>
 <!DOCTYPE html>
 <html>
 <head>
