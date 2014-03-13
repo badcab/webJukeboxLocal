@@ -227,7 +227,7 @@ class Player extends Base {
 		if(count($song_bank) < 2 * HEAT_SIZE){
 			$Song = new Song();
 			$Song->resetPlayCount();
-			$song_bank = loadSession();	
+			$song_bank = $this->loadSession();	
 		}
 
 		return array('song_bank' => $song_bank, 'path' => $song['file_path']);
