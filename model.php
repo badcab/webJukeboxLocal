@@ -96,9 +96,7 @@ class Song extends Base {
 		foreach($music_root as $file){
 			if(is_dir(MUSIC_DIRECTORY . '/' . $file) && substr($file, 0, 1) != '.'){
 				foreach(scandir(MUSIC_DIRECTORY . '/' . $file) as $music){
-					echo '.';
-//echo print_r($getID3->analyze(MUSIC_DIRECTORY . '/' . $file . '/' . $music),TRUE);
-
+					echo '.'; 
 					if(is_file(MUSIC_DIRECTORY . '/' . $file . '/' . $music) && $audio_tag = $getID3->analyze(MUSIC_DIRECTORY . '/' . $file . '/' . $music)){
 						$file_path = MUSIC_DIRECTORY . '/' . $file . '/' . $music;
 						if(isset($audio_tag['tags']['id3v1'])){
@@ -224,6 +222,12 @@ class Player extends Base {
 		$song = $this->get($top_vote_song_id, 'songs');
 
 		$song_bank = $this->addHeat($song_bank);
+		
+		if(count($song_bank) < 2 * HEAT_SIZE){
+			$Song = new Song();
+			$Song->resetPlayCount();
+			$song_bank = loadSession();	
+		}
 
 		return array('song_bank' => $song_bank, 'path' => $song['file_path']);
 	}
