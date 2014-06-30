@@ -12,37 +12,8 @@ if($o == '--play'){
 		$song_bank = $out['song_bank'];
 		$play_cmd = "omxplayer " . escapeshellarg($out['path']);
 		echo "playing {$out['path']} \n";
-		//echo $play_cmd . "\n";
 		exec($play_cmd);
 	}
-}
-
-if($o == '--first'){
-	$song = '/home/pi/12 Sea of Love.m4a';
-	$play_cmd = "omxplayer " . escapeshellarg($song);
-	echo "playing {$song}\n";
-	exec($play_cmd);
-}
-
-if($o == '--bride-dad'){
-	$song = '/home/pi/14 - Landslide (Remastered LP Version).mp3';
-	$play_cmd = "omxplayer " . escapeshellarg($song);
-	echo "playing {$song}\n";
-	exec($play_cmd);
-}
-
-if($o == '--garter'){
-	$song = '/home/pi/11 - My Life (Feat_ Tim Armstrong).mp3';
-	$play_cmd = "omxplayer " . escapeshellarg($song);
-	echo "playing {$song}\n";
-	exec($play_cmd);
-}
-
-if($o == '--bouquet'){
-	$song = '/home/pi/05 Girlfriend.m4a';
-	$play_cmd = "omxplayer " . escapeshellarg($song);
-	echo "playing {$song}\n";
-	exec($play_cmd);
 }
 
 if($o == '--reset' || $o == '--hard-reset'){

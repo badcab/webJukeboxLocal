@@ -1,43 +1,25 @@
 webJukeboxLocal
 ===============
 
-An offline implementation of my web jukebox program
+A music voting webapp for use on a lan that might not have exteral internet connectivity
 
 
 Setup
-====
+---------------------
 
-On a freash install of Raspbian the pi_setup.sh file might work, I haven't tested it. If someone does let me know. 
+This was program was written for and tested on a Raspberry Pi running Raspian. Setup should be as simple as running the pi_setup.sh script but the setup script has not been tested please report an issue if it does not work.
 
-You will have to install lighttpd mysql and other programs dictated in the setup file
+	`su -c './pi_setup.sh'`
 
-jQuery, bootstap, Zend and getID3 will have to be downloaded with wget
+in your MUSIC_DIRECTORY as defined in config.php Inside of that directory make any number of subdirectories (but at least one) and inside of these directories place mp3 files with properly populated id3 tags. These subdirectories are inteded to be music genreas but you can subdevide the music files up using any methodaligy you wish.
 
-Set up a MySQL user and run the db_setup.sql file to create your tables
+make sure you have run the sql file and setup the mysql database, then edit the config.php file to fit your specific needs. Then run the --hard-reset option to index your music files.
 
-Edit the config.php file with your information
+	`php player.php --hard-reset`
 
-place mp3 files in sub folders in your MUSIC_DIRECTORY as defined in config.php
--these sub folders will be the category that each song belongs to for example /home/pi/music/rock
+plug your Raspberry Pi into a wireless router and privide your guest with the ip address of the Raspberry Pi. The will then need to point there web browsers to that ip. This was designed for mobile browsers with javascript enabled but desktop computer will work to as long as they are all connected to the same lan
 
-once done adding your music files go to your root web directory likely /var/www
+start the music playback
 
-php player.php --hard-reset 
-
-this command will index your music directory
-
-load a web browser on another computer and point it at the web server if you are unsure run
-php player.php --help
-
-the bottem line should be the URL you need to go to
-
-Start voting for music, when you are ready to start playing music type
-
-php player.php --play
-
-
-note
-=====
-
-I wrote this program for my own use so you will see options in the player.php file that apply only to me, feel free to change or remove these options.
+	`php player.php --play`
 
